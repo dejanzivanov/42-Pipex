@@ -51,7 +51,7 @@ void	ft_pid_check(int i);
 void	ft_file_creator(char **argv, int argc);
 void	ft_inputfile_checker(char *filename, char **argv, \
 int argc, t_helper **help);
-void	ft_outputfile_checker(const char *filename);
+void	ft_outputfile_checker(const char *filename, t_helper **help);
 char	*ft_get_cmd_path(const char *cmd, char **path_split);
 char	**ft_split_path(char **env);
 void	ft_cmd_check(char **argv, int argc, t_helper **help, t_list **cmd_list);

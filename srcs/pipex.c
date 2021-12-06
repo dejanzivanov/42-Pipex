@@ -59,7 +59,7 @@ int	main(int argc, char **argv)
 	help = ft_calloc(sizeof(t_helper), 1);
 	ft_argument_check(argc, &help);
 	ft_inputfile_checker(argv[1], argv, argc, &help);
-	ft_outputfile_checker(argv[argc - 1]);
+	ft_outputfile_checker(argv[argc - 1], &help);
 	ft_cmd_check(argv, argc, &help, &cmd_list);
 	ft_setup_help(&help, argv, argc, 0);
 	ft_pipe(argc, cmd_list, &help);

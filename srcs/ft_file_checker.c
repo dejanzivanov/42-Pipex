@@ -6,7 +6,7 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 05:18:43 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/06 00:45:19 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:04:20 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_inputfile_checker(char *filename, char **argv, int argc, \
 		{
 			ft_file_creator(argv, argc);
 			perror("Input file without reading rights");
+			free(*help);
 			ft_file_descriptor_killer();
 			exit(0);
 		}
@@ -37,12 +38,13 @@ void	ft_inputfile_checker(char *filename, char **argv, int argc, \
 	}
 }
 
-void	ft_outputfile_checker(const char *filename)
+void	ft_outputfile_checker(const char *filename, t_helper **help)
 {
 	if (access(filename, F_OK) == 0)
 	{
 		if (access(filename, W_OK) != 0)
 		{
+			free(*help);
 			perror("Output file without writing rights");
 			ft_file_descriptor_killer();
 			exit(0);
