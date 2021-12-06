@@ -6,7 +6,7 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 05:49:20 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/03 23:14:05 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/06 00:58:31 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_free_elements(char **path_splits, t_list **cmd_list, \
 	ft_free_list(*cmd_list);
 	free(content);
 	free(elem);
-	ft_file_descriptor_killer();
 	perror("Invalid Command");
+	ft_file_descriptor_killer();
 	exit(1);
 }
 
@@ -75,26 +75,29 @@ char	**ft_split_path(char **env)
 	exit(1);
 }
 
-void	ft_cmd_check(char **argv, int i, char **envp, \
-					int argc, t_list **cmd_list)
+void	ft_cmd_check(char **argv, int argc, t_helper **help, t_list **cmd_list)
 {
 	t_content	*content;
 	t_list		*elem;
 	char		**path_splits;
 	int			j;
+	int			i;
 
 	j = 0;
-	path_splits = ft_split_path(envp);
+	i = 0;
+	path_splits = ft_split_path(__environ);
 	while (i + 2 <= argc - 2)
 	{
 		content = ft_calloc(1, sizeof(t_content));
-		content->cmd_n_flags = ft_split(argv[i + 2], ' ');
-		content->path = ft_get_cmd_path(content->cmd_n_flags[0], path_splits);
-		content->index = j;
+		ft_add_lst(&content, argv, i, path_splits);
 		elem = ft_lstnew(content);
 		ft_lstadd_back(cmd_list, elem);
 		if (content->path == NULL)
+		{
+			ft_file_creator(argv, argc);
+			free(*help);
 			ft_free_elements(path_splits, cmd_list, content, elem);
+		}
 		j++;
 		i++;
 	}

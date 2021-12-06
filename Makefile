@@ -11,11 +11,12 @@
 # **************************************************************************** #
 
 CC			= gcc
-CFLAGS		= -g3
+#CFLAGS		= -g3
 CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		=
 RM			= rm -f
 SRCD		= ./srcs/
-SRC			= pipex.c ft_file_checker.c ft_cmd_check.c ft_handlers.c ft_mem_handlers.c
+SRC			= pipex.c ft_file_checker.c ft_cmd_check.c ft_handlers.c ft_utilities_1.c ft_mem_handlers.c ft_utilities_2.c
 # Command to add the source folder prefix (instead of having it added manually to SRC)
 SRCF		= $(addprefix $(SRCD),$(SRC))
 OBJD		= ./objs/
@@ -42,9 +43,12 @@ $(OBJD)%.o: $(SRCD)%.c
 	@mkdir -p $(OBJD)
 	$(CC) $(CFLAGS) -I ${HEADD} -c -o $@ $<
 
+# $(NAME):	${OBJF}
+# 			make libftmake
+# 			$(CC) $(CFLAGS) $(SRCF) -o $(NAME) $(HEADD)$(HEADF) $(LIBFTD)$(LIBFTL)
 $(NAME):	${OBJF}
 			make libftmake
-			$(CC) $(CFLAGS) $(SRCF) -o $(NAME) $(HEADD)$(HEADF) $(LIBFTD)$(LIBFTL)
+			$(CC) $(CFLAGS) $(SRCF) -o $(NAME) -L $(HEADD) $(LIBFTD)$(LIBFTL)
 
 
 all:		${NAME}

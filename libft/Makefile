@@ -1,6 +1,5 @@
 CC			= gcc
-#CFLAGS		= -Wall -Wextra -Werror
-CFLAGS		=
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 SRCD		= ./srcs/
 SRC			= ft_atoi_special.c ft_itoa.c ft_split.c ft_strtrim.c ft_memccpy.c ft_strdup.c ft_substr.c ft_strchr.c \
@@ -27,7 +26,7 @@ HEADF		= libft.h
 #Note: the object directory will only be created if not existing already. -p flag throws no errors when already there
 $(OBJD)%.o: $(SRCD)%.c
 	@mkdir -p $(OBJD)
-	$(CC) $(CFLAGS) -I ${HEADD} -lbsd -c -o $@ $<
+	$(CC) $(CFLAGS) -I ${HEADD} -c -o $@ $<
 
 $(NAME):	${OBJF}
 			ar rcs ${NAME} ${OBJF}

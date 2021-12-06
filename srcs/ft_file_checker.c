@@ -6,13 +6,14 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 05:18:43 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/03 23:27:14 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/06 00:45:19 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/pipex.h"
 
-void	ft_inputfile_checker(char *filename)
+void	ft_inputfile_checker(char *filename, char **argv, int argc, \
+							t_helper **help)
 {
 	if (access(filename, F_OK) == 0)
 	{
@@ -20,6 +21,7 @@ void	ft_inputfile_checker(char *filename)
 			return ;
 		else
 		{
+			ft_file_creator(argv, argc);
 			perror("Input file without reading rights");
 			ft_file_descriptor_killer();
 			exit(0);
@@ -27,7 +29,9 @@ void	ft_inputfile_checker(char *filename)
 	}
 	else
 	{
+		ft_file_creator(argv, argc);
 		perror("Invalid Input File");
+		free(*help);
 		ft_file_descriptor_killer();
 		exit(0);
 	}
