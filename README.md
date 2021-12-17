@@ -1,3 +1,4 @@
 # 42-Pipex
 
- Project about how pipe works in UNIX - Work in Progress
+ Project done with bonus part of handling multiple pipes.
+**![pipex_mark](https://github.com/dejanzivanov/42-Pipex/blob/master/pipex.png)**
