@@ -6,7 +6,7 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 06:27:02 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/05 06:31:43 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/08 01:54:17 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	ft_fd_close(int x, int y)
 	close(y);
 }
 
-void	ft_cmd_exec(t_list *cmd_list)
+void	ft_cmd_exec(t_list *cmd_list, t_helper **help)
 {
 	if (execve(((t_content *)(cmd_list->content))->path, \
-	((t_content *)(cmd_list->content))->cmd_n_flags, __environ) == -1)
+	((t_content *)(cmd_list->content))->cmd_n_flags, (*help)->envp) == -1)
 	{
 		perror("Command execution failed");
 		ft_file_descriptor_killer();

@@ -6,7 +6,7 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 06:28:49 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/05 06:33:31 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/08 01:53:09 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_double_close(int (*fd)(int), int (*ft)(int), t_helper **help)
 	ft((*help)->fd[1]);
 }
 
-void	ft_pid_helper(int (*fd)(int *), __pid_t (*f)(void), t_helper **help)
+void	ft_pid_helper(int (*fd)(int *), pid_t (*f)(void), t_helper **help)
 {
 	fd((*help)->fd);
 	(*help)->pid = f();
@@ -50,7 +50,7 @@ void	ft_last_cmd(t_list *cmd_list, t_helper **help)
 	close((*help)->fd[0]);
 	close((*help)->fd[1]);
 	if (execve(((t_content *)(cmd_list->content))->path, \
-		((t_content *)(cmd_list->content))->cmd_n_flags, __environ) == -1)
+		((t_content *)(cmd_list->content))->cmd_n_flags, (*help)->envp) == -1)
 	{
 		perror("Command was not executed");
 		ft_file_descriptor_killer();

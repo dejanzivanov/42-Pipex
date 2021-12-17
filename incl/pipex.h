@@ -34,18 +34,19 @@ typedef struct s_helper
 {
 	pid_t	pid;
 	int		fd[2];
+	char	**envp;
 
 }			t_helper;
 
 void	ft_add_lst(t_content	**content, char **argv, int i, char **p_s);
 void	ft_double_close(int (*fd)(int), int (*ft)(int), t_helper **help);
-void	ft_pid_helper(int (*fd)(int *), __pid_t (*f)(void), t_helper **help);
+void	ft_pid_helper(int (*fd)(int *), pid_t (*f)(void), t_helper **help);
 void	ft_file_creator(char **argv, int argc);
 void	ft_argument_check(int argc, t_helper **help);
 void	ft_last_cmd(t_list *cmd_list, t_helper **help);
 void	ft_dup_close_out(int (*ft)(int, int), int (*fd)(int), int i);
 void	ft_setup_help(t_helper **help, char **argv, int argc, int j);
-void	ft_cmd_exec(t_list *cmd_list);
+void	ft_cmd_exec(t_list *cmd_list, t_helper **help);
 void	ft_fd_close(int x, int y);
 void	ft_pid_check(int i);
 void	ft_file_creator(char **argv, int argc);

@@ -13,7 +13,7 @@
 #include "../incl/pipex.h"
 
 void	ft_pid_helper1(int (*dp)(int, int), int (*clo)(int), \
-	__pid_t (*wai)(__pid_t, int *, int), t_helper **help)
+				pid_t (*wai)(pid_t, int *, int), t_helper **help)
 {
 	wai((*help)->pid, NULL, 0);
 	clo((*help)->fd[1]);
@@ -36,7 +36,7 @@ void	ft_pipe(int argc, t_list *cmd_list, t_helper **help)
 			close((*help)->fd[0]);
 			if (cmd_list->next != NULL)
 				ft_dup_close_out(&dup2, &close, (*help)->fd[1]);
-			ft_cmd_exec(cmd_list);
+			ft_cmd_exec(cmd_list, help);
 		}
 		else
 		{
@@ -50,13 +50,14 @@ void	ft_pipe(int argc, t_list *cmd_list, t_helper **help)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_list		*cmd_list;
 	t_helper	*help;
 
 	cmd_list = NULL;
 	help = ft_calloc(sizeof(t_helper), 1);
+	help->envp = envp;
 	ft_argument_check(argc, &help);
 	ft_inputfile_checker(argv[1], argv, argc, &help);
 	ft_outputfile_checker(argv[argc - 1], &help);

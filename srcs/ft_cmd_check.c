@@ -6,7 +6,7 @@
 /*   By: dzivanov <dzivanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 05:49:20 by dzivanov          #+#    #+#             */
-/*   Updated: 2021/12/06 00:58:31 by dzivanov         ###   ########.fr       */
+/*   Updated: 2021/12/08 01:54:54 by dzivanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_cmd_check(char **argv, int argc, t_helper **help, t_list **cmd_list)
 
 	j = 0;
 	i = 0;
-	path_splits = ft_split_path(__environ);
+	path_splits = ft_split_path((*help)->envp);
 	while (i + 2 <= argc - 2)
 	{
 		content = ft_calloc(1, sizeof(t_content));
